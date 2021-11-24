@@ -8,13 +8,11 @@ export const Pagination = ({
   totalPageCount,
   siblingCount = 1,
 }) => {
-  console.log("До хука ", totalPageCount);
   const paginationRange = usePagination({
     totalPageCount,
     currentPage,
     siblingCount,
   });
-  console.log("Pagination Range", paginationRange);
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }

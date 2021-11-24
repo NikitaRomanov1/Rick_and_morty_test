@@ -2,14 +2,11 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_ALL_CHARACTERS } from "./query/character";
-import {
-  ChildrenGridStyle,
-  InputStyle,
-  ParentGridStyle,
-} from "./styles/styles";
-import { MemoizedPagination, Pagination } from "./components/Pagination";
-import { Select } from "./components/Select";
+import { ChildrenGridStyle, ParentGridStyle } from "./styles/styles";
+import { Pagination } from "./components/Pagination";
+
 import { Filter } from "./components/Filter";
+import { Popup } from "./components/Popup";
 
 function App() {
   const [info, setInfo] = useState({
@@ -22,7 +19,7 @@ function App() {
     species: " ",
     type: " ",
   });
-
+  const [moreInfo, setMoreInfo] = useState(1);
   const { data, loading, error } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
       name: info.name,
@@ -33,6 +30,25 @@ function App() {
       type: info.type,
     },
   });
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+  const openPopup = (id) => {
+    setMoreInfo(id);
+    setPopupOpen(true);
+  };
+  // const {
+  //   data: dataMoreInfo,
+  //   loading: loadingMoreInfo,
+  //   error: errorMoreInfo,
+  // } = useQuery(GET_CHARACTER_BY_ID, {
+  //   variables: {
+  //     ids: moreInfo,
+  //   },
+  // });
+
   const searchByName = (e) => {
     setInfo({ ...info, name: e.target.value, currentPage: 1 });
   };
@@ -55,6 +71,7 @@ function App() {
   // console.log("Инфо:", info);
   // console.log(data);
   // console.log(error);
+
   return (
     <>
       <Filter
@@ -64,9 +81,9 @@ function App() {
         searchByType={searchByType}
         searchBySpecies={searchBySpecies}
       />
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
+      {error && <h1>No such characters</h1>}
+      {loading && <h1>Loading...</h1>}
+      {data && (
         <div
           style={{
             margin: "0 auto",
@@ -75,9 +92,14 @@ function App() {
             alignItems: "center",
           }}
         >
+          {popupOpen && <Popup onClick={closePopup} id={moreInfo} />}
           <ParentGridStyle>
             {info.characters.map((character, index) => (
-              <ChildrenGridStyle key={index}>
+              <ChildrenGridStyle
+                key={index}
+                style={{ cursor: "pointer" }}
+                onClick={() => (!popupOpen ? openPopup(character.id) : null)}
+              >
                 <img src={character.image} />
               </ChildrenGridStyle>
             ))}
@@ -99,4 +121,4 @@ function App() {
 
 export default App;
 
-Разобраться со стрелочкой пагинации на маленьком экране, и нажатие на каждого перса
+//Разобраться со стрелочкой пагинации на маленьком экране, и нажатие на каждого перса + вывод ошибки

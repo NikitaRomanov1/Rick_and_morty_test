@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme, device } from "./theme";
+import { device } from "./theme";
 export const ParentGridStyle = styled.div`
   width: 50%;
   margin: 0 auto;
@@ -36,14 +36,15 @@ export const ChildrenGridStyle = styled.div`
 `;
 export const PagintaionContainerStyle = styled.ul`
   display: flex;
-  width: "80%";
+  width: "100%";
+  margin-top: 8px;
 `;
 
 export const PaginationItemStyle = styled.li.attrs((props) => ({
   className: props.className,
 }))`
   height: 32px;
-  padding: 0 12px;
+  padding: 0 5px;
   text-align: center;
   margin: auto 4px;
   color: rgba(0, 0, 0, 0.87);
@@ -54,7 +55,7 @@ export const PaginationItemStyle = styled.li.attrs((props) => ({
   border-radius: 16px;
   line-height: 1.43;
   font-size: 18px;
-  min-width: 32px;
+  /* max-width: 30px; */
   &.selected {
     background-color: rgba(0, 0, 0, 0.08);
   }
@@ -116,4 +117,17 @@ export const InputStyle = styled.input`
   &:focus {
     outline: 0;
   }
+`;
+export const BackdropStyle = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

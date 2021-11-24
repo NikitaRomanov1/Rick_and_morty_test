@@ -23,30 +23,29 @@ export const GET_ALL_CHARACTERS = gql`
         pages
       }
       results {
-        name
-        status
-        species
-        type
-        gender
+        id
         image
       }
     }
   }
 `;
-// export const FILTER_ALL_CHARACTERS = gql`
-//   query getCharacters($name: String!) {
-//     characters(filter: { name: $name }) {
-//       info {
-//         count
-//       }
-//       results {
-//         name
-//         status
-//         species
-//         type
-//         gender
-//         image
-//       }
-//     }
-//   }
-// `;
+
+export const GET_CHARACTER_BY_ID = gql`
+  query getCharactersByIds($ids: [ID!]!) {
+    charactersByIds(ids: $ids) {
+      name
+      status
+      species
+      type
+      gender
+      origin {
+        name
+        type
+        dimension
+        created
+      }
+      image
+      created
+    }
+  }
+`;
