@@ -57,4 +57,4 @@ export const Pagination = ({
   );
 };
 
-//export const MemoizedPagination = React.memo(Pagination);
+export const MemoizedPagination = React.memo(Pagination);

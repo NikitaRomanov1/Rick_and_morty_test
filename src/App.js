@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_ALL_CHARACTERS } from "./query/character";
-import { ChildrenGridStyle, ParentGridStyle } from "./styles/styles";
-import { Pagination } from "./components/Pagination";
+import {
+  ChildrenGridStyle,
+  ParentGridStyle,
+  ImgStyle,
+  MainContainerStyle,
+} from "./styles/styles";
+import { MemoizedPagination } from "./components/Pagination";
 
 import { Filter } from "./components/Filter";
 import { Popup } from "./components/Popup";
@@ -39,15 +44,6 @@ function App() {
     setMoreInfo(id);
     setPopupOpen(true);
   };
-  // const {
-  //   data: dataMoreInfo,
-  //   loading: loadingMoreInfo,
-  //   error: errorMoreInfo,
-  // } = useQuery(GET_CHARACTER_BY_ID, {
-  //   variables: {
-  //     ids: moreInfo,
-  //   },
-  // });
 
   const searchByName = (e) => {
     setInfo({ ...info, name: e.target.value, currentPage: 1 });
@@ -68,9 +64,6 @@ function App() {
       });
     }
   }, [data]);
-  // console.log("Инфо:", info);
-  // console.log(data);
-  // console.log(error);
 
   return (
     <>
@@ -84,14 +77,7 @@ function App() {
       {error && <h1>No such characters</h1>}
       {loading && <h1>Loading...</h1>}
       {data && (
-        <div
-          style={{
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <MainContainerStyle>
           {popupOpen && <Popup onClick={closePopup} id={moreInfo} />}
           <ParentGridStyle>
             {info.characters.map((character, index) => (
@@ -100,25 +86,23 @@ function App() {
                 style={{ cursor: "pointer" }}
                 onClick={() => (!popupOpen ? openPopup(character.id) : null)}
               >
-                <img src={character.image} />
+                <ImgStyle src={character.image} />
               </ChildrenGridStyle>
             ))}
           </ParentGridStyle>
           <div>
             {info.totalPageCount > 0 && (
-              <Pagination
+              <MemoizedPagination
                 totalPageCount={info.totalPageCount}
                 currentPage={info.currentPage}
                 onPageChange={(page) => setInfo({ ...info, currentPage: page })}
               />
             )}
           </div>
-        </div>
+        </MainContainerStyle>
       )}
     </>
   );
 }
 
 export default App;
-
-//Разобраться со стрелочкой пагинации на маленьком экране, и нажатие на каждого перса + вывод ошибки

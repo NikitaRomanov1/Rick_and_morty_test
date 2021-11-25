@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { device } from "./theme";
 export const ParentGridStyle = styled.div`
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -25,14 +25,13 @@ export const ParentGridStyle = styled.div`
     grid-template-columns: repeat(5, 1fr);
   }
   @media ${device.desktopL} {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 `;
 
 export const ChildrenGridStyle = styled.div`
   display: grid;
-  margin-bottom: 5px;
-  border-radius: 6px;
+  margin-top: 10px;
 `;
 export const PagintaionContainerStyle = styled.ul`
   display: flex;
@@ -84,7 +83,12 @@ export const ArrowStyle = styled.div.attrs((props) => ({
     transform: rotate(45deg);
   }
 `;
-
+export const MainContainerStyle = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export const SelectStyle = styled.select`
   display: flex;
   margin: 0 auto;
@@ -130,4 +134,36 @@ export const BackdropStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+export const PopupContentStyle = styled.div`
+  width: clamp(15%, 98%, 700px);
+  height: 400px;
+  margin: auto;
+  background: white;
+  padding: 5px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media ${device.mobileS} {
+    flex-direction: column;
+    height: 520px;
+  }
+`;
+export const ImgStyle = styled.img`
+  border-radius: 10px;
+`;
+export const InfoCardStyle = styled.div`
+  border: 1px solid #f5deb3;
+  border-radius: 10px;
+  height: 75%;
+  width: 95%;
+  padding: 10px 5px;
+  @media ${device.tablet} {
+    margin-left: 15px;
+    margin-right: 10px;
+  }
+`;
+export const HrStyle = styled.hr`
+  color: #f5deb3;
 `;

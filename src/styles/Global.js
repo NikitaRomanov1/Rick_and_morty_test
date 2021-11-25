@@ -7,7 +7,7 @@ const Global = createGlobalStyle`
   box-sizing: border-box; 
 }
 body {
-  font-family: sans-serif;
+  font-family: "Segoe UI Emoji" ,sans-serif;
 }
 `;
 

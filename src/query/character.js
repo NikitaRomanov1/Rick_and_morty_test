@@ -38,6 +38,9 @@ export const GET_CHARACTER_BY_ID = gql`
       species
       type
       gender
+      episode {
+        name
+      }
       origin {
         name
         type

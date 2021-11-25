@@ -9,14 +9,7 @@ export const Filter = ({
   info,
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div>
       <InputStyle
         placeholder="Search by name"
         onChange={(e) => searchByName(e)}
